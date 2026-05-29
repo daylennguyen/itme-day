@@ -28,6 +28,9 @@ npm run test:e2e
 
 Deploy to **Vercel** with the **repository root** as the project root (single Next.js app, not a monorepo).
 
+- GitHub: https://github.com/daylennguyen/itme-day
+- Vercel: https://itme-day.vercel.app
+
 ## Agents
 
 - Prefer **`gh`** for GitHub (create repo, push, PRs).
