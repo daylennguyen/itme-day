@@ -1,6 +1,6 @@
 # itme.day
 
-Minimal **project link hub** for [itme.day](https://itme.day): one page listing outbound links to projects.
+Minimal **project link hub** for [itme.day](https://itme.day): one page listing outbound links to projects. The homepage Gobby mascot face uses [Motion](https://motion.dev/) and Flubber (ported from Chill Component / dnd5e login).
 
 ## Local development
 

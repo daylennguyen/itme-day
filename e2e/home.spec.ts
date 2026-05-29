@@ -7,6 +7,9 @@ test("home page lists project titles", async ({ page }) => {
 
   const firstTitle = projects[0]?.title;
   expect(firstTitle).toBeTruthy();
+  await expect(
+    page.getByRole("img", { name: "Gobby mascot" }),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
   await expect(page.getByText(firstTitle!, { exact: true })).toBeVisible();
 });
