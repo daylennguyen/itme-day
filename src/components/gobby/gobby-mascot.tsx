@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { cn } from "@/lib/utils";
 
-/** Defer Motion + Flubber face so `/gobby.svg` can paint first (FCP). */
+/** Defer anime.js + path morphing so `/gobby.svg` can paint first (FCP). */
 const ChillUtilCatFace = dynamic(
   () =>
     import("./chill-util-cat-face").then((mod) => mod.ChillUtilCatFace),
@@ -13,14 +13,17 @@ const ChillUtilCatFace = dynamic(
 
 type GobbyMascotProps = {
   className?: string;
-  /** Inner square frame (defaults to homepage size when omitted). */
+  /** Inner square frame (defaults to large login size when omitted). */
   frameClassName?: string;
-  /** Closed-eye smile (Chill `pleasant`). */
+  /** Login form hover: closed-eye smile (Chill `pleasant`). */
   smiley?: boolean;
 };
 
 /**
  * Face overlay in % of the square mascot frame (`gobby.svg` viewBox 0 0 2048 2048).
+ * Avoid the old merged-SVG `(200 * 8.0833) / 2048` box (~79% wide) — wrong for `ChillUtilCatFace`.
+ * Constants below match the DevTools-measured sweet spot (login, ~416px img):
+ * `wRatio≈0.342`, `hRatio≈0.228`, `cxRel≈0.460`, `cyRel≈0.495`.
  */
 const GOBBY_FACE = {
   centerX: 941.5,
@@ -28,13 +31,14 @@ const GOBBY_FACE = {
   widthU: 700,
 } as const;
 
+/** Eyes, mouth, eyebrows — same in light and dark (matches `/gobby.svg` accent). */
 const GOBBY_FACE_STROKE = "#334E43";
 
 const faceWidthPct = (GOBBY_FACE.widthU / 2048) * 100;
 const faceLeftPct = (GOBBY_FACE.centerX / 2048) * 100;
 const faceTopPct = (GOBBY_FACE.centerY / 2048) * 100;
 
-/** Full-color `/gobby.svg` with Chill-style stacked SVG face + Motion on the head. */
+/** Login mascot: full-color `/gobby.svg` with Chill Component-style stacked SVG face + anime.js on the head. */
 export function GobbyMascot({
   className,
   frameClassName,
@@ -49,10 +53,10 @@ export function GobbyMascot({
       <div
         className={cn(
           "relative mx-auto aspect-square w-full cursor-pointer",
-          frameClassName ?? "max-w-[16rem]",
+          frameClassName ?? "max-w-[24rem] sm:max-w-[26rem]",
         )}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- local static SVG */}
+        {/* eslint-disable-next-line @next/next/no-img-element -- local static SVG; avoids bundling 170+ path SVG */}
         <img
           src="/gobby.svg"
           alt=""

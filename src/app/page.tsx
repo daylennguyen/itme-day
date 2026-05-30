@@ -2,14 +2,14 @@
 
 import { motion } from "motion/react";
 
-// import { GobbyMascot } from "@/components/gobby/gobby-mascot";
+import { GobbyMascot } from "@/components/gobby/gobby-mascot";
 import { ProjectLinkCard } from "@/components/project-link-card";
 import { projects } from "@/data/projects";
 
 export default function HomePage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col gap-10 px-6 py-16">
-
+      <GobbyMascot className="mx-auto" />
 
       <motion.header
         className="space-y-2"

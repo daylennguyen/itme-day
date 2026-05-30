@@ -1,13 +1,15 @@
 "use client";
 
 /**
- * Chill Component `util-cat-face` port — stacked SVGs + Motion/Flubber path morphing.
+ * React port of Chill Component `util-cat-face` (stacked SVGs + anime.js path morphing).
+ * SVG markup strings: `chill-face-static-markup.ts` (generated from upstream Vue templates).
+ * Animation logic: `chill-face-layer-runners.ts` (generated from upstream `<script setup>`).
+ *
  * @see https://chillcomponent.codlin.me/en/components/util-cat-face/
  * @see https://gitlab.com/side_project/chill-component (MIT)
  */
-import { motion } from "motion/react";
+import anime from "animejs";
 import {
-  type PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useId,
@@ -23,24 +25,29 @@ import {
   runChillEyebrowAnimation,
   runChillEyeAnimation,
   runChillMouthAnimation,
-  stopAllChillFaceAnimations,
-} from "./chill-face-motion-runners";
+} from "./chill-face-layer-runners";
 import {
   CHILL_EYE_SVG,
   CHILL_EYEBROW_SVG,
   CHILL_MOUTH_SVG,
 } from "./chill-face-static-markup";
 import {
-  CHILL_TAP_CYCLE,
-  type ChillFacialExpression,
-} from "./chill-expressions";
-import {
   type ChillPointerFollowScope,
   computeChillEyeViewBox,
 } from "./chill-eye-view-box";
 import { usePrefersReducedMotion } from "./use-prefers-reduced-motion";
 
-export type { ChillFacialExpression } from "./chill-expressions";
+type ChillFacialExpression =
+  | "neutral"
+  | "excited"
+  | "happy"
+  | "sad"
+  | "angry"
+  | "surprised"
+  | "derpy"
+  | "speechless"
+  | "pleasant"
+  | "confidence";
 
 export type ChillUtilCatFaceProps = {
   className?: string;
@@ -73,8 +80,115 @@ function useStableDomId(prefix: string) {
   );
 }
 
-const WRAPPER_NEUTRAL = { rotate: 0, x: 0, y: 0, scaleX: 1, scaleY: 1 };
-const WRAPPER_HAPPY = { y: [5, -5] };
+function runWrapperMotion(
+  el: HTMLElement | null,
+  expression: ChillFacialExpression,
+): void {
+  if (!el) return;
+  anime.remove(el);
+
+  const loops: ChillFacialExpression[] = [
+    "excited",
+    "happy",
+    "sad",
+    "angry",
+    "surprised",
+    "derpy",
+  ];
+
+  const startExpression = (): void => {
+    switch (expression) {
+      case "neutral":
+        break;
+      case "excited":
+        anime({
+          targets: el,
+          keyframes: [{ rotate: 5 }, { rotate: -5 }],
+          easing: "easeInOutCubic",
+          direction: "alternate",
+          duration: 600,
+          loop: true,
+        });
+        break;
+      case "happy":
+        anime({
+          targets: el,
+          keyframes: [
+            { translateY: 5, easing: "easeInCubic" },
+            { translateY: -5, easing: "easeOutCubic" },
+          ],
+          direction: "alternate",
+          duration: 600,
+          loop: true,
+        });
+        break;
+      case "sad":
+        anime({
+          targets: el,
+          keyframes: [{ translateY: 1 }, { translateY: -1 }],
+          easing: "linear",
+          direction: "alternate",
+          duration: 100,
+          loop: true,
+        });
+        break;
+      case "angry":
+        anime({
+          targets: el,
+          keyframes: [
+            { translateY: 5, easing: "easeInOutCirc" },
+            { translateY: -5, easing: "easeInOutCirc" },
+          ],
+          direction: "alternate",
+          duration: 1200,
+          loop: true,
+        });
+        break;
+      case "surprised":
+        anime({
+          targets: el,
+          keyframes: [{ translateX: 2 }, { translateX: -2 }],
+          easing: "linear",
+          direction: "alternate",
+          duration: 100,
+          loop: true,
+        });
+        break;
+      case "derpy":
+        anime({
+          targets: el,
+          keyframes: [
+            { scaleX: 0.9, scaleY: 1.1, easing: "easeInOutCirc" },
+            { scaleX: 1.1, scaleY: 0.9, easing: "easeInOutCirc" },
+          ],
+          direction: "alternate",
+          duration: 1200,
+          loop: true,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  void (async () => {
+    const reset = anime({
+      targets: el,
+      rotate: 0,
+      translateX: 0,
+      translateY: 0,
+      scaleX: 1,
+      scaleY: 1,
+      duration: 200,
+    });
+    await reset.finished;
+
+    if (expression === "neutral" || !loops.includes(expression)) {
+      return;
+    }
+    startExpression();
+  })();
+}
 
 export function ChillUtilCatFace({
   className,
@@ -89,13 +203,13 @@ export function ChillUtilCatFace({
   const eyeId = useStableDomId("e");
   const mouthId = useStableDomId("m");
 
+  const faceRef = useRef<HTMLDivElement>(null);
   const browHost = useRef<HTMLDivElement>(null);
   const eyeHost = useRef<HTMLDivElement>(null);
   const mouthHost = useRef<HTMLDivElement>(null);
   const eyeSvgRef = useRef<SVGSVGElement | null>(null);
 
-  const [internal, setInternal] =
-    useState<ChillFacialExpression>(initialExpression);
+  const [internal, setInternal] = useState<ChillFacialExpression>(initialExpression);
   const isControlled = controlled !== undefined;
   const expression = isControlled ? controlled : internal;
   const reducedMotion = usePrefersReducedMotion();
@@ -122,20 +236,12 @@ export function ChillUtilCatFace({
 
   useLayoutEffect(() => {
     if (!browHost.current) return;
-    browHost.current.innerHTML = buildSvgHtml(
-      CHILL_EYEBROW_SVG,
-      browId,
-      strokeColor,
-    );
+    browHost.current.innerHTML = buildSvgHtml(CHILL_EYEBROW_SVG, browId, strokeColor);
   }, [browId, strokeColor]);
 
   useLayoutEffect(() => {
     if (!mouthHost.current) return;
-    mouthHost.current.innerHTML = buildSvgHtml(
-      CHILL_MOUTH_SVG,
-      mouthId,
-      strokeColor,
-    );
+    mouthHost.current.innerHTML = buildSvgHtml(CHILL_MOUTH_SVG, mouthId, strokeColor);
   }, [mouthId, strokeColor]);
 
   useLayoutEffect(() => {
@@ -156,17 +262,20 @@ export function ChillUtilCatFace({
   }, [viewBoxStr]);
 
   useEffect(() => {
-    if (reducedMotion) {
-      stopAllChillFaceAnimations({ browId, eyeId, mouthId });
-      return;
-    }
     void runChillEyebrowAnimation(browId, expression);
+  }, [browId, expression]);
+
+  useEffect(() => {
     void runChillMouthAnimation(mouthId, expression);
+  }, [mouthId, expression]);
+
+  useEffect(() => {
     void runChillEyeAnimation(eyeId, expression);
-    return () => {
-      stopAllChillFaceAnimations({ browId, eyeId, mouthId });
-    };
-  }, [browId, eyeId, mouthId, expression, reducedMotion]);
+  }, [eyeId, expression]);
+
+  useEffect(() => {
+    runWrapperMotion(faceRef.current, expression);
+  }, [expression]);
 
   const updateMouseFromClient = useCallback((clientX: number, clientY: number) => {
     const svg = eyeSvgRef.current;
@@ -181,7 +290,7 @@ export function ChillUtilCatFace({
   }, []);
 
   const onEyePointerMove = useCallback(
-    (e: ReactPointerEvent<HTMLDivElement>) => {
+    (e: React.PointerEvent<HTMLDivElement>) => {
       if (trackViewportPointer) return;
       updateMouseFromClient(e.clientX, e.clientY);
     },
@@ -208,6 +317,11 @@ export function ChillUtilCatFace({
     };
   }, [trackViewportPointer, updateMouseFromClient]);
 
+  const cycle: ChillFacialExpression[] = useMemo(
+    () => ["neutral", "happy", "surprised", "sad", "neutral"],
+    [],
+  );
+
   const bumpHappy = useCallback(() => {
     if (!interactive || isControlled) return;
     setInternal("happy");
@@ -221,36 +335,19 @@ export function ChillUtilCatFace({
   const tapCycle = useCallback(() => {
     if (!interactive || isControlled) return;
     setInternal((prev) => {
-      const i = CHILL_TAP_CYCLE.indexOf(prev);
-      const next =
-        i >= 0 ? CHILL_TAP_CYCLE[(i + 1) % CHILL_TAP_CYCLE.length]! : "neutral";
+      const i = cycle.indexOf(prev);
+      const next = i >= 0 ? cycle[(i + 1) % cycle.length]! : "neutral";
       return next;
     });
-  }, [interactive, isControlled]);
-
-  const wrapperAnimate =
-    reducedMotion || expression !== "happy"
-      ? WRAPPER_NEUTRAL
-      : WRAPPER_HAPPY;
-
-  const wrapperTransition =
-    expression === "happy" && !reducedMotion
-      ? {
-          duration: 0.6,
-          repeat: Infinity,
-          repeatType: "reverse" as const,
-          ease: "easeInOut" as const,
-        }
-      : { duration: 0.2, type: "spring" as const, stiffness: 300, damping: 20 };
+  }, [interactive, isControlled, cycle]);
 
   return (
-    <motion.div
+    <div
+      ref={faceRef}
       className={cn(
         "relative aspect-[3/2] w-full touch-manipulation",
         className,
       )}
-      animate={wrapperAnimate}
-      transition={wrapperTransition}
       onPointerEnter={interactive && !isControlled ? bumpHappy : undefined}
       onPointerLeave={interactive && !isControlled ? releaseHover : undefined}
       onPointerDown={
@@ -279,6 +376,6 @@ export function ChillUtilCatFace({
         className="absolute left-0 top-0 h-full w-full"
         aria-hidden
       />
-    </motion.div>
+    </div>
   );
 }

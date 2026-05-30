@@ -19,9 +19,9 @@ describe("ChillUtilCatFace", () => {
     const html = renderToStaticMarkup(
       createElement(ChillUtilCatFace, {
         interactive: false,
-        initialExpression: "pleasant",
+        initialExpression: "surprised",
       }),
     );
-    expect(html).toContain('data-facial-expression="pleasant"');
+    expect(html).toContain('data-facial-expression="surprised"');
   });
 });
