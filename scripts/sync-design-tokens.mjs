@@ -41,28 +41,13 @@ const lightBlock = css.slice(lightStart, lightEnd).trim();
 
 const header = `/* Production mirror of docs/itme.day Design System/colors_and_type.css */
 /* Regenerate: node scripts/sync-design-tokens.mjs */
-
-@font-face {
-  font-family: "RuneScape UF";
-  src: url("/fonts/runescape_uf__1_.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "OptimusPrinceps";
-  src: url("/fonts/OptimusPrinceps.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+/* Fantasy faces: public/fonts/ via src/lib/fonts.ts (next/font/local) */
 
 `;
 
 const mergedRoot = rootBlock.replace(
   /:root\s*\{/,
-  `:root {\n  --font-fantasy: "RuneScape UF", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;\n  --font-titling: "OptimusPrinceps", "Times New Roman", Georgia, serif;`,
+  `:root {\n  --font-fantasy: var(--font-runescape), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;\n  --font-titling: var(--font-titling-face), "Times New Roman", Georgia, serif;`,
 ).replace(
   /\s*--font-sans:[^;]+;\s*/,
   "\n",

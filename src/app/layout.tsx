@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { ThemeScript } from "@/components/theme-script";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { optimusPrinceps, runescapeUF } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
@@ -37,16 +39,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(
+        "dark",
+        geistSans.variable,
+        geistMono.variable,
+        runescapeUF.variable,
+        optimusPrinceps.variable,
+      )}
+      suppressHydrationWarning
+    >
       <head>
         <ThemeScript />
         {/* Prebuilt Tailwind v4 bundle — cannot import via JS with our Tailwind v3 PostCSS setup */}
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel="stylesheet" href="/rng-react-components.css" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans`}
-      >
+      <body className="min-h-screen font-sans">
         <ThemeToggle />
         {children}
       </body>
