@@ -93,7 +93,7 @@ export function GobbyMascot({
       <div
         className={cn(
           "relative mx-auto aspect-square w-full",
-          frameClassName ?? "max-w-[24rem] sm:max-w-[26rem]",
+          frameClassName ?? "max-w-[12rem] sm:max-w-[13rem]",
         )}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- local static SVG; avoids bundling 170+ path SVG */}

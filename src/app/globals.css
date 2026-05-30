@@ -40,11 +40,16 @@
     --ring: 0 0% 83%;
   }
 
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+/* Match Storybook canvas backdrop for rng-react-components consoles */
+.rng-console-host {
+  background-color: #09090b;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.05) 0px, transparent 50%);
 }

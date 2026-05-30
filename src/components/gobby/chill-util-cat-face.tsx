@@ -114,8 +114,8 @@ function runWrapperMotion(
         anime({
           targets: el,
           keyframes: [
-            { translateY: 5, easing: "easeInCubic" },
-            { translateY: -5, easing: "easeOutCubic" },
+            { translateY: 2, easing: "easeInCubic" },
+            { translateY: -2, easing: "easeOutCubic" },
           ],
           direction: "alternate",
           duration: 600,
