@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background:#09090b; background-image:var(--rng-backdrop); color:#d4d4d8; }
+  .wrap { padding: 24px 28px; }
+  .panel { background:rgba(24,24,27,0.6); border:1px solid rgba(39,39,42,0.8); border-radius:16px; padding:20px 22px; box-shadow:0 4px 20px rgba(0,0,0,.5); }
+  .head { display:flex; align-items:center; justify-content:space-between; }
+  .title { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:700; letter-spacing:0.02em; color:#d4d4d8; }
+  .stats { display:flex; gap:24px; }
+  .stat { display:flex; flex-direction:column; gap:5px; }
+  .lab { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#71717a; display:flex; align-items:center; gap:5px; }
+  .val { font-family:var(--font-mono); font-weight:900; font-size:18px; line-height:1; letter-spacing:-0.02em; }
+  i { width:14px; height:14px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="head">
+        <div class="title"><i data-lucide="dices" style="color:#a78bfa"></i> D20 ROLL CONSOLE</div>
+        <div class="stats">
+          <div class="stat"><span class="lab"><i data-lucide="trophy" style="color:#34d399"></i>Wins</span><span class="val" style="color:#34d399">12</span></div>
+          <div class="stat"><span class="lab"><i data-lucide="x-circle" style="color:#fb7185"></i>Losses</span><span class="val" style="color:#fb7185">3</span></div>
+          <div class="stat"><span class="lab"><i data-lucide="percent" style="color:#34d399"></i>Win Ratio</span><span class="val" style="color:#34d399">80.00%</span></div>
+          <div class="stat"><span class="lab"><i data-lucide="flame" style="color:#fb923c"></i>Streak</span><span class="val" style="color:#d4d4d8">5</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

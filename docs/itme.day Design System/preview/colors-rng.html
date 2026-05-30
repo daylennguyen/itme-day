@@ -1,0 +1,30 @@
+<!-- @dsCard group="Colors" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #09090b; color: #d4d4d8; }
+  .wrap { padding: 24px 28px; }
+  .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .sw { display: flex; flex-direction: column; gap: 7px; }
+  .chip { height: 52px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); }
+  .nm { font-size: 11px; font-weight: 700; letter-spacing: -0.01em; color: #e4e4e7; }
+  .role { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: #71717a; }
+  .hx { font-family: var(--font-mono); font-size: 10px; color: #71717a; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <div class="sw"><div class="chip" style="background:#6366f1; box-shadow:0 0 14px rgba(99,102,241,.45)"></div><span class="role">primary</span><span class="nm">indigo</span><span class="hx">#6366f1</span></div>
+      <div class="sw"><div class="chip" style="background:#8b5cf6; box-shadow:0 0 14px rgba(139,92,246,.45)"></div><span class="role">dice</span><span class="nm">violet</span><span class="hx">#8b5cf6</span></div>
+      <div class="sw"><div class="chip" style="background:#10b981; box-shadow:0 0 14px rgba(16,185,129,.4)"></div><span class="role">win</span><span class="nm">emerald</span><span class="hx">#10b981</span></div>
+      <div class="sw"><div class="chip" style="background:#f43f5e; box-shadow:0 0 14px rgba(244,63,94,.4)"></div><span class="role">loss</span><span class="nm">rose</span><span class="hx">#f43f5e</span></div>
+      <div class="sw"><div class="chip" style="background:#fb923c; box-shadow:0 0 14px rgba(251,146,60,.35)"></div><span class="role">streak</span><span class="nm">orange</span><span class="hx">#fb923c</span></div>
+      <div class="sw"><div class="chip" style="background:#18181b"></div><span class="role">surface</span><span class="nm">zinc-900</span><span class="hx">#18181b</span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- @dsCard group="Colors" -->
+<!DOCTYPE html>
+<html class="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #ffffff; color: #171717; }
+  .wrap { padding: 24px 28px; }
+  .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .sw { display: flex; flex-direction: column; gap: 7px; }
+  .chip { height: 56px; border-radius: 8px; border: 1px solid #e5e5e5; }
+  .nm { font-size: 11px; font-weight: 600; letter-spacing: -0.01em; }
+  .hx { font-family: var(--font-mono); font-size: 10px; color: #737373; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <div class="sw"><div class="chip" style="background:#ffffff"></div><span class="nm">background</span><span class="hx">#ffffff</span></div>
+      <div class="sw"><div class="chip" style="background:#f5f5f5"></div><span class="nm">secondary</span><span class="hx">#f5f5f5</span></div>
+      <div class="sw"><div class="chip" style="background:#e5e5e5"></div><span class="nm">border</span><span class="hx">#e5e5e5</span></div>
+      <div class="sw"><div class="chip" style="background:#737373"></div><span class="nm">muted-fg</span><span class="hx">#737373</span></div>
+      <div class="sw"><div class="chip" style="background:#171717"></div><span class="nm">foreground</span><span class="hx">#171717</span></div>
+      <div class="sw"><div class="chip" style="background:#171717"></div><span class="nm">primary</span><span class="hx">#171717</span></div>
+    </div>
+  </div>
+</body>
+</html>

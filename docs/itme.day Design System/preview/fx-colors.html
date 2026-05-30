@@ -1,0 +1,37 @@
+<!-- @dsCard group="Type" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #17171b; color: #fff; }
+  .wrap { padding: 22px 30px 26px; }
+  .head { font-family: var(--font-titling); font-size: 17px; letter-spacing: 0.04em; color: #e6d5b8; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 18px; font-family: var(--font-fantasy); font-size: 21px; line-height: 1; }
+  .grid span { white-space: nowrap; }
+  .red { color: var(--fx-red); } .purple { color: var(--fx-purple); } .green { color: var(--fx-green); }
+  .cyan { color: var(--fx-cyan); } .yellow { color: var(--fx-yellow); } .white { color: var(--fx-white); }
+  .orange { color: var(--fx-orange); } .pink { color: var(--fx-pink); } .brown { color: var(--fx-brown); }
+  .blue { color: var(--fx-blue); } .grey { color: var(--fx-grey); }
+  .inverted { color: transparent; -webkit-text-stroke: 1px #d8cdb4; }
+  .rainbow { background: linear-gradient(90deg,#e34b4b,#ee8d2c,#ecc24e,#46a832,#46c8d2,#3f6fd6,#b455c8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lbl { font-family: var(--font-sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #6b6b72; margin: 14px 0 6px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">Text Colours</div>
+    <div class="lbl">Existing</div>
+    <div class="grid">
+      <span class="red">Red:</span><span class="purple">Purple:</span><span class="green">Green:</span><span class="cyan">Cyan:</span>
+      <span class="yellow">Yellow:</span><span class="white">White:</span>
+    </div>
+    <div class="lbl">New</div>
+    <div class="grid">
+      <span class="orange">Orange:</span><span class="pink">Pink:</span><span class="brown">Brown:</span><span class="blue">Blue:</span>
+      <span class="inverted">Inverted:</span><span class="grey">Grey:</span><span class="rainbow">Rainbow:</span>
+    </div>
+  </div>
+</body>
+</html>

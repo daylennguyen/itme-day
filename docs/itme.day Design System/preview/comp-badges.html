@@ -1,0 +1,25 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background:#0a0a0c; color:#d4d4d8; }
+  .wrap { padding: 30px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  .badge { padding:7px 16px; border-radius:999px; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:0.06em; }
+  .win { background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#34d399; box-shadow:0 0 16px rgba(16,185,129,0.25); }
+  .miss { background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.4); color:#fb7185; box-shadow:0 0 16px rgba(244,63,94,0.25); }
+  .nat1 { background:rgba(39,39,42,0.8); border:1px solid #3f3f46; color:#a1a1aa; }
+  .nat20 { background:rgba(139,92,246,0.18); border:1px solid rgba(139,92,246,0.5); color:#a78bfa; box-shadow:0 0 16px rgba(139,92,246,0.3); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge win">Win</span>
+    <span class="badge miss">Miss</span>
+    <span class="badge nat1">Nat 1</span>
+    <span class="badge nat20">Nat 20</span>
+  </div>
+</body>
+</html>

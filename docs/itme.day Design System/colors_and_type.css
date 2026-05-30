@@ -1,0 +1,243 @@
+/* ============================================================================
+   itme.day — Colors & Type
+   Canonical design-system spec. Production mirror: src/styles/design-tokens.css
+   Personal site / project hub for Daylen Nguyen. Two visual worlds share one
+   typeface system:
+     1. BASE  — minimal monochrome (zinc/neutral), cozy + clean. Default dark.
+     2. RNG   — dark neon "gaming console" (indigo / emerald / rose / violet).
+   Plus the GOBBY goblin mascot earth-tone palette.
+   Fonts: Geist + Geist Mono (Google Fonts). 100% free / OFL.
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap');
+
+/* RuneScape UF — self-hosted fantasy/D&D display face (user-uploaded).
+   Thematic accent for the goblin / Gobby world: badges, playful headings,
+   the mascot blurb. NOT a replacement for Geist (the system typeface). */
+@font-face {
+  font-family: "RuneScape UF";
+  src: url("fonts/runescape_uf__1_.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* OptimusPrinceps — self-hosted elegant medieval titling serif (user-uploaded).
+   Fantasy headings / titles — the regal counterpart to RuneScape UF's pixel voice. */
+@font-face {
+  font-family: "OptimusPrinceps";
+  src: url("fonts/OptimusPrinceps.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Type families ---------------------------------------------------- */
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  --font-fantasy: "RuneScape UF", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-titling: "OptimusPrinceps", "Times New Roman", Georgia, serif;
+
+  /* ---- BASE palette — DARK (the site default, <html class="dark">) ------ */
+  /* HSL-from-source, resolved to hex for portability. Neutral/zinc ramp.    */
+  --background: #121212;        /* 0 0% 7%   page */
+  --foreground: #fafafa;        /* 0 0% 98%  text */
+  --card: #1a1a1a;              /* 0 0% 10%  surface */
+  --card-foreground: #fafafa;
+  --primary: #fafafa;           /* inverted: light on dark */
+  --primary-foreground: #171717;
+  --secondary: #242424;         /* 0 0% 14%  chips / secondary btn */
+  --secondary-foreground: #fafafa;
+  --muted: #242424;
+  --muted-foreground: #a3a3a3;  /* 0 0% 64%  captions */
+  --accent: #242424;
+  --accent-foreground: #fafafa;
+  --border: #2e2e2e;            /* 0 0% 18% */
+  --input: #2e2e2e;
+  --ring: #d4d4d4;              /* 0 0% 83% */
+  --radius: 0.5rem;
+
+  /* ---- GOBBY goblin mascot earth tones (from gobby.svg) ----------------- */
+  --gobby-skin: #849B49;        /* leafy goblin green (face highlight)  */
+  --gobby-skin-deep: #324D29;   /* shadow green (ears, jaw)             */
+  --gobby-cream: #E6D5B8;       /* portrait ring fill / parchment       */
+  --gobby-ring: #7B5E3D;        /* portrait ring stroke                 */
+  --gobby-shirt: #8B5B33;       /* tunic                                */
+  --gobby-shirt-deep: #523013;  /* tunic shadow                         */
+  --gobby-cap: #4C6F70;         /* teal beanie / hair                   */
+  --gobby-cap-deep: #334E43;    /* face stroke + cap shadow (the "ink") */
+
+  /* ---- RNG neon console palette ----------------------------------------- */
+  --rng-bg: #09090b;            /* zinc-950, console backdrop           */
+  --rng-surface: #18181b;       /* zinc-900                             */
+  --rng-surface-2: #27272a;     /* zinc-800                             */
+  --rng-line: #2e2e35;          /* zinc-800/80 borders                  */
+  --rng-text: #d4d4d8;          /* zinc-300 console text                */
+  --rng-muted: #71717a;         /* zinc-500 labels                      */
+
+  --rng-indigo: #6366f1;        /* primary / active                     */
+  --rng-indigo-light: #818cf8;  /* indigo-400 text                      */
+  --rng-indigo-deep: #4f46e5;   /* indigo-600 button base               */
+  --rng-violet: #8b5cf6;        /* d20 / dice accent                    */
+  --rng-violet-light: #a78bfa;
+  --rng-emerald: #10b981;       /* WIN                                  */
+  --rng-emerald-light: #34d399;
+  --rng-rose: #f43f5e;          /* LOSS                                 */
+  --rng-rose-light: #fb7185;
+  --rng-rose-deep: #e11d48;
+  --rng-orange: #fb923c;        /* streak / flame                       */
+
+  /* ---- RuneScape-style chat TEXT-EFFECT palette ------------------------- */
+  /* Colour codes for the goblin/D&D text renderer (see image reference).    */
+  --fx-red: #d83c3c;
+  --fx-purple: #b455c8;
+  --fx-green: #46a832;
+  --fx-cyan: #46c8d2;
+  --fx-yellow: #ecc24e;
+  --fx-white: #ffffff;
+  --fx-orange: #ee8d2c;
+  --fx-pink: #e986b4;
+  --fx-brown: #8a6a46;
+  --fx-blue: #3f6fd6;
+  --fx-grey: #9b9b9b;
+  /* "inverted" = transparent fill + light outline (use -webkit-text-stroke) */
+  /* "rainbow"  = animated hue cycle (see fx keyframes / .fx-rainbow)        */
+
+  /* Console backdrop glow + chrome shadows */
+  --rng-backdrop:
+    radial-gradient(at 50% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.05) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.05) 0, transparent 50%);
+  --rng-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --rng-glow-active: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+/* ---- BASE palette — LIGHT (opt-in via :root.light or .light scope) ------ */
+.light {
+  --background: #ffffff;
+  --foreground: #171717;        /* 0 0% 9% */
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;         /* 0 0% 96% */
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;  /* 0 0% 45% */
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --border: #e5e5e5;            /* 0 0% 90% */
+  --input: #e5e5e5;
+  --ring: #171717;
+}
+
+/* ============================================================================
+   SEMANTIC TYPE — Geist scale used across itme.day base surfaces.
+   Tracking is tight on headings, wide on uppercase eyebrows/labels.
+   ============================================================================ */
+
+.eyebrow {                       /* "itme.day" / "RNG" kicker above titles */
+  font-family: var(--font-sans);
+  font-size: 0.875rem;           /* 14px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;         /* tracking-widest */
+  color: var(--muted-foreground);
+}
+
+.h1 {
+  font-family: var(--font-sans);
+  font-size: 1.875rem;           /* 30px — base page title */
+  font-weight: 600;
+  letter-spacing: -0.02em;       /* tracking-tight */
+  line-height: 1.15;
+  color: var(--foreground);
+}
+
+.h2 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;            /* 20px */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--foreground);
+}
+
+.card-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--card-foreground);
+}
+
+.p {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.muted {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+
+.code, code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* ---- RNG "console" display type --------------------------------------- */
+.rng-display {                   /* big console hero — RNG PROBABILITY CONSOLE */
+  font-family: var(--font-sans);
+  font-weight: 900;              /* font-black */
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  line-height: 1.0;
+  color: #ffffff;
+}
+
+.rng-label {                     /* tiny stat / control labels */
+  font-family: var(--font-sans);
+  font-size: 0.625rem;           /* 10px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rng-muted);
+}
+
+.rng-stat {                      /* mono numerals — wins/losses/ratio */
+  font-family: var(--font-mono);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.rng-tab {                       /* nav tab labels */
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fantasy-display {               /* RuneScape UF — goblin/D&D accent voice */
+  font-family: var(--font-fantasy);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.titling {                       /* OptimusPrinceps — regal fantasy titles */
+  font-family: var(--font-titling);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}

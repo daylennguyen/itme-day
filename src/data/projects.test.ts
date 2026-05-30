@@ -12,13 +12,22 @@ function isValidHttpUrl(value: string): boolean {
 }
 
 describe("projects", () => {
-  it("should expose at least one valid project link", () => {
-    expect(projects.length).toBeGreaterThan(0);
+  it("should expose valid project links with tags", () => {
+    expect(projects.length).toBeGreaterThanOrEqual(3);
 
     for (const project of projects) {
       expect(project.id.trim().length).toBeGreaterThan(0);
       expect(project.title.trim().length).toBeGreaterThan(0);
+      expect(project.description.trim().length).toBeGreaterThan(0);
       expect(isValidHttpUrl(project.href)).toBe(true);
+      expect(project.tags.length).toBeGreaterThan(0);
+      for (const tag of project.tags) {
+        expect(tag.trim().length).toBeGreaterThan(0);
+      }
     }
+  });
+
+  it("should include rng-react-components", () => {
+    expect(projects.some((p) => p.id === "rng-react-components")).toBe(true);
   });
 });

@@ -1,0 +1,72 @@
+<!-- @dsCard group="Type" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: #17171b; color: #fff; }
+  .wrap { padding: 22px 28px 26px; }
+  .head { font-family: var(--font-titling); font-size: 17px; letter-spacing: 0.04em; color: #e6d5b8; margin-bottom: 18px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 16px; }
+  .cell { display: flex; flex-direction: column; gap: 7px; }
+  .lbl { font-family: var(--font-sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #6b6b72; }
+  .fx { font-family: var(--font-fantasy); font-size: 23px; line-height: 1; color: #fff; height: 26px; display: flex; align-items: center; overflow: hidden; }
+  .fx span { display: inline-block; }
+
+  /* per-character motion (chars split by JS) */
+  @keyframes waveChar { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+  @keyframes wave3Char { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(-12deg); } }
+  @keyframes shakeChar { 0%,100% { transform: translate(0,0); } 25% { transform: translate(1.5px,-1.5px); } 50% { transform: translate(-1.5px,1px); } 75% { transform: translate(1px,1.5px); } }
+  @keyframes rainbowChar { 0% { color:#e34b4b; } 16% { color:#ee8d2c; } 33% { color:#ecc24e; } 50% { color:#46a832; } 66% { color:#46c8d2; } 83% { color:#3f6fd6; } 100% { color:#b455c8; } }
+
+  /* whole-word effects */
+  .glow { color: #ffe27a; animation: glowPulse 1.3s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100% { text-shadow: 0 0 2px #ffcf4a; } 50% { text-shadow: 0 0 14px #ffcf4a, 0 0 22px #ff9d2e; } }
+  .flash { animation: flashColor 0.7s steps(1) infinite; }
+  @keyframes flashColor { 0% { color:#e34b4b; } 50% { color:#3f6fd6; } }
+  .mirror { display: inline-block; transform: scaleX(-1); }
+
+  .track { width: 100%; }
+  .scroll { display: inline-block; white-space: nowrap; animation: scrollX 3.4s linear infinite; }
+  @keyframes scrollX { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+  .slidebox { height: 26px; overflow: hidden; }
+  .slide { display: inline-block; animation: slideY 2.2s ease-in-out infinite; }
+  @keyframes slideY { 0% { transform: translateY(-26px); } 45%,55% { transform: translateY(0); } 100% { transform: translateY(26px); } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">Text Effects</div>
+    <div class="grid">
+      <div class="cell"><span class="lbl">Wave</span><div class="fx" data-fx="wave">Wave</div></div>
+      <div class="cell"><span class="lbl">Wave3</span><div class="fx" data-fx="wave3">Wave3</div></div>
+      <div class="cell"><span class="lbl">Shake</span><div class="fx" data-fx="shake">Shake</div></div>
+      <div class="cell"><span class="lbl">Rainbow</span><div class="fx" data-fx="rainbow">Rainbow</div></div>
+      <div class="cell"><span class="lbl">Glow</span><div class="fx"><span class="glow">Glow</span></div></div>
+      <div class="cell"><span class="lbl">Flash</span><div class="fx"><span class="flash">Flash</span></div></div>
+      <div class="cell"><span class="lbl">Scroll</span><div class="fx track"><span class="scroll">Scroll</span></div></div>
+      <div class="cell"><span class="lbl">Slide</span><div class="fx slidebox"><span class="slide">Slide</span></div></div>
+      <div class="cell"><span class="lbl">Mirror</span><div class="fx"><span class="mirror">Mirror</span></div></div>
+    </div>
+  </div>
+
+  <script>
+    const STEP = { wave: 0.07, wave3: 0.07, shake: 0.04, rainbow: 0.09 };
+    const DUR = { wave: "1s", wave3: "1s", shake: "0.35s", rainbow: "1.6s" };
+    const KF = { wave: "waveChar", wave3: "wave3Char", shake: "shakeChar", rainbow: "rainbowChar" };
+    document.querySelectorAll("[data-fx]").forEach((el) => {
+      const fx = el.dataset.fx;
+      const text = el.textContent;
+      el.textContent = "";
+      [...text].forEach((ch, i) => {
+        const s = document.createElement("span");
+        s.textContent = ch;
+        s.style.animation = `${KF[fx]} ${DUR[fx]} ease-in-out infinite`;
+        s.style.animationDelay = `${i * STEP[fx]}s`;
+        el.appendChild(s);
+      });
+    });
+  </script>
+</body>
+</html>

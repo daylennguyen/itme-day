@@ -1,0 +1,106 @@
+/* Production mirror of docs/itme.day Design System/colors_and_type.css (BASE, Gobby, RNG, FX). */
+
+@font-face {
+  font-family: "RuneScape UF";
+  src: url("/fonts/runescape_uf__1_.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OptimusPrinceps";
+  src: url("/fonts/OptimusPrinceps.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-fantasy: "RuneScape UF", var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-titling: "OptimusPrinceps", "Times New Roman", Georgia, serif;
+
+  /* BASE — dark default */
+  --background: #121212;
+  --foreground: #fafafa;
+  --card: #1a1a1a;
+  --card-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #171717;
+  --secondary: #242424;
+  --secondary-foreground: #fafafa;
+  --muted: #242424;
+  --muted-foreground: #a3a3a3;
+  --accent: #242424;
+  --accent-foreground: #fafafa;
+  --border: #2e2e2e;
+  --input: #2e2e2e;
+  --ring: #d4d4d4;
+  --radius: 0.5rem;
+
+  --gobby-skin: #849b49;
+  --gobby-skin-deep: #324d29;
+  --gobby-cream: #e6d5b8;
+  --gobby-ring: #7b5e3d;
+  --gobby-shirt: #8b5b33;
+  --gobby-shirt-deep: #523013;
+  --gobby-cap: #4c6f70;
+  --gobby-cap-deep: #334e43;
+
+  --rng-bg: #09090b;
+  --rng-surface: #18181b;
+  --rng-surface-2: #27272a;
+  --rng-line: #2e2e35;
+  --rng-text: #d4d4d8;
+  --rng-muted: #71717a;
+  --rng-indigo: #6366f1;
+  --rng-indigo-light: #818cf8;
+  --rng-indigo-deep: #4f46e5;
+  --rng-violet: #8b5cf6;
+  --rng-violet-light: #a78bfa;
+  --rng-emerald: #10b981;
+  --rng-emerald-light: #34d399;
+  --rng-rose: #f43f5e;
+  --rng-rose-light: #fb7185;
+  --rng-rose-deep: #e11d48;
+  --rng-orange: #fb923c;
+
+  --fx-red: #d83c3c;
+  --fx-purple: #b455c8;
+  --fx-green: #46a832;
+  --fx-cyan: #46c8d2;
+  --fx-yellow: #ecc24e;
+  --fx-white: #ffffff;
+  --fx-orange: #ee8d2c;
+  --fx-pink: #e986b4;
+  --fx-brown: #8a6a46;
+  --fx-blue: #3f6fd6;
+  --fx-grey: #9b9b9b;
+
+  --rng-backdrop:
+    radial-gradient(at 50% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.05) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.05) 0, transparent 50%);
+  --rng-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --rng-glow-active:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #171717;
+}

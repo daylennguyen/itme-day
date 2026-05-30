@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: var(--background); color: var(--foreground); }
+  .wrap { padding: 26px 30px; display: flex; gap: 22px; align-items: flex-end; }
+  .item { display: flex; flex-direction: column; gap: 9px; align-items: center; }
+  .box { width: 84px; height: 64px; background: var(--card); border: 1px solid var(--border); }
+  .nm { font-size: 11px; font-weight: 600; }
+  .px { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="item"><div class="box" style="border-radius:6px"></div><span class="nm">button</span><span class="px">md · 6px</span></div>
+    <div class="item"><div class="box" style="border-radius:8px"></div><span class="nm">base</span><span class="px">--radius · 8px</span></div>
+    <div class="item"><div class="box" style="border-radius:12px"></div><span class="nm">card</span><span class="px">xl · 12px</span></div>
+    <div class="item"><div class="box" style="border-radius:16px"></div><span class="nm">panel</span><span class="px">2xl · 16px</span></div>
+    <div class="item"><div class="box" style="border-radius:999px; width:64px"></div><span class="nm">avatar / pill</span><span class="px">full</span></div>
+  </div>
+</body>
+</html>

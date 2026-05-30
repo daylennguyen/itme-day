@@ -1,0 +1,31 @@
+<!-- @dsCard group="Type" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-mono); background: var(--background); color: var(--foreground); }
+  .wrap { padding: 26px 30px; display: flex; flex-direction: column; gap: 16px; }
+  .lab { font-family: var(--font-sans); }
+  .nums { display: flex; gap: 28px; align-items: baseline; }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat small { font-family: var(--font-sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-foreground); }
+  .big { font-size: 34px; font-weight: 900; letter-spacing: -0.02em; line-height: 1; }
+  .row { font-size: 13px; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="lab eyebrow">Geist Mono · numerals &amp; code</div>
+    <div class="nums">
+      <div class="stat"><small style="color:#34d399">Win ratio</small><span class="big" style="color:#34d399">68.42%</span></div>
+      <div class="stat"><small>DC</small><span class="big">11</span></div>
+      <div class="stat"><small style="color:#fb923c">Streak</small><span class="big">7</span></div>
+      <div class="stat"><small style="color:#fb7185">Losses</small><span class="big" style="color:#fb7185">3</span></div>
+    </div>
+    <div class="row">const roll = Math.floor(rng() * 20) + 1; // d20</div>
+    <div class="row" style="letter-spacing:0.04em">0 1 2 3 4 5 6 7 8 9 · % + − = → ✓ ✕</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background:#09090b; background-image:var(--rng-backdrop); color:#d4d4d8; }
+  .wrap { padding: 24px 28px; }
+  .bar { display:flex; gap:4px; background:rgba(24,24,27,0.6); border:1px solid rgba(39,39,42,0.8); border-radius:16px; padding:4px; box-shadow:0 4px 20px rgba(0,0,0,.4); }
+  .tab { flex:1; display:flex; align-items:center; justify-content:center; gap:7px; padding:12px 8px; border-radius:12px; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:0.05em; color:#71717a; border:1px solid transparent; }
+  .tab.active { background:rgba(79,70,229,0.2); border-color:rgba(99,102,241,0.3); color:#818cf8; box-shadow:inset 0 1px 1px rgba(255,255,255,0.1), 0 0 10px rgba(99,102,241,0.2); }
+  i { width:14px; height:14px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <div class="tab"><i data-lucide="activity"></i>Dice Slider</div>
+      <div class="tab"><i data-lucide="coins"></i>Coin Flip</div>
+      <div class="tab"><i data-lucide="flame" style="color:#f43f5e"></i>RNG Wheel</div>
+      <div class="tab active"><i data-lucide="dices"></i>D20 Roll</div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

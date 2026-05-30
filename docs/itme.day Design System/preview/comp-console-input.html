@@ -1,0 +1,32 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background:#09090b; background-image:var(--rng-backdrop); color:#d4d4d8; }
+  .wrap { padding: 24px 28px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field { background:rgba(24,24,27,0.5); border:1px solid rgba(39,39,42,0.8); border-radius:12px; padding:16px 18px; }
+  .lab { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#d4d4d8; }
+  .sub { font-size:10px; color:#71717a; margin-top:2px; }
+  .input { margin-top:14px; background:#0a0a0c; border:1px solid #27272a; border-radius:8px; height:46px; display:flex; align-items:center; justify-content:space-between; padding:0 14px; }
+  .input span { font-family:var(--font-mono); font-weight:700; font-size:18px; color:#fafafa; }
+  .input small { font-family:var(--font-mono); color:#71717a; font-size:14px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="field">
+      <div class="lab">Difficulty Class (DC)</div>
+      <div class="sub">DC = Difficulty Class</div>
+      <div class="input"><span>11</span></div>
+    </div>
+    <div class="field">
+      <div class="lab">Win Chance %</div>
+      <div class="sub">&nbsp;</div>
+      <div class="input"><span>50.00</span><small>%</small></div>
+    </div>
+  </div>
+</body>
+</html>

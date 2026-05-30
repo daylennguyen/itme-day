@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: var(--background); color: var(--foreground); }
+  .wrap { padding: 28px 30px; display:flex; flex-direction:column; gap:18px; }
+  .tabs { display:grid; grid-template-columns:1fr 1fr; gap:4px; background:#242424; border-radius:8px; padding:4px; max-width:320px; }
+  .tab { position:relative; height:34px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:500; border-radius:6px; color:var(--muted-foreground); }
+  .tab.active { background:#121212; color:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,.5); }
+  .hint { font-size:11px; color:var(--muted-foreground); font-family:var(--font-mono); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="tabs"><div class="tab active">Home</div><div class="tab">RNG</div></div>
+    <div class="hint">sliding indicator · spring(stiffness 500, damping 35)</div>
+  </div>
+</body>
+</html>

@@ -1,61 +1,41 @@
 "use client";
 
-import { motion } from "motion/react";
 import { useState } from "react";
 
-import { GobbyMascot } from "@/components/gobby/gobby-mascot";
-import { ProjectLinkCard } from "@/components/project-link-card";
+import { GobbyMascotHub } from "@/components/hub/gobby-mascot-hub";
+import { HubHome } from "@/components/hub/hub-home";
 import { RngDemoTabs } from "@/components/rng-demo-tabs";
+import { SiteFooter } from "@/components/site-footer";
 import { SlidingTabTrigger } from "@/components/sliding-tab-trigger";
+import { TextFxPanel } from "@/components/text-fx/text-fx-panel";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { projects } from "@/data/projects";
 
 export default function HomePage() {
   const [tab, setTab] = useState("home");
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-10 px-6 py-16">
-      <GobbyMascot className="mx-auto" />
+    <main className="mx-auto flex min-h-screen max-w-[600px] flex-col gap-14 px-6 pb-16 pt-[72px] sm:gap-14">
+      <GobbyMascotHub />
 
       <Tabs
         value={tab}
         onValueChange={setTab}
         className="flex w-full flex-col gap-8"
       >
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <SlidingTabTrigger value="home" activeTab={tab}>
             Home
           </SlidingTabTrigger>
           <SlidingTabTrigger value="rng" activeTab={tab}>
             RNG
           </SlidingTabTrigger>
+          <SlidingTabTrigger value="fx" activeTab={tab}>
+            Text FX
+          </SlidingTabTrigger>
         </TabsList>
 
-        <TabsContent value="home" className="mt-0 flex flex-col gap-10">
-          <motion.header
-            className="flex flex-col gap-2"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
-            <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-              itme.day
-            </p>
-            <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
-            <p className="text-muted-foreground">
-              A minimal list of things I am building.
-            </p>
-          </motion.header>
-
-          <ul className="flex flex-col gap-4" aria-label="Projects">
-            {projects.map((project, index) => (
-              <ProjectLinkCard
-                key={project.id}
-                project={project}
-                index={index}
-              />
-            ))}
-          </ul>
+        <TabsContent value="home" className="mt-0">
+          <HubHome />
         </TabsContent>
 
         <TabsContent value="rng" className="mt-0 flex flex-col gap-6">
@@ -75,7 +55,13 @@ export default function HomePage() {
             <RngDemoTabs />
           </div>
         </TabsContent>
+
+        <TabsContent value="fx" className="mt-0">
+          <TextFxPanel />
+        </TabsContent>
       </Tabs>
+
+      <SiteFooter />
     </main>
   );
 }
