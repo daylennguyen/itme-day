@@ -1,10 +1,25 @@
 /* Production mirror of docs/itme.day Design System/colors_and_type.css (BASE, Gobby, RNG, FX). */
-/* Fantasy faces load via next/font/local from public/fonts/ — see src/lib/fonts.ts */
+/* Fantasy faces: next/font/local (src/lib/fonts.ts) + /fonts/ fallback below */
+
+@font-face {
+  font-family: "RuneScape UF";
+  src: url("/fonts/runescape_uf__1_.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OptimusPrinceps";
+  src: url("/fonts/OptimusPrinceps.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
-  --font-fantasy: var(--font-runescape), var(--font-geist-sans), ui-sans-serif,
-    system-ui, sans-serif;
-  --font-titling: var(--font-titling-face), "Times New Roman", Georgia, serif;
+  --font-titling: var(--font-titling-face), "OptimusPrinceps", "Times New Roman",
+    Georgia, serif;
 
   /* BASE — dark default */
   --background: #121212;

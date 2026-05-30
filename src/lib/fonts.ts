@@ -5,6 +5,7 @@ export const runescapeUF = localFont({
   src: "../../public/fonts/runescape_uf__1_.ttf",
   variable: "--font-runescape",
   display: "swap",
+  fallback: ["RuneScape UF", "ui-sans-serif", "sans-serif"],
 });
 
 /** Self-hosted from public/fonts/ (OptimusPrinceps — fantasy titling). */

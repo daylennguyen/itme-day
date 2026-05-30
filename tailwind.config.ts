@@ -9,8 +9,18 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
-        fantasy: ["var(--font-fantasy)"],
-        titling: ["var(--font-titling)"],
+        fantasy: [
+          "var(--font-runescape)",
+          '"RuneScape UF"',
+          "ui-sans-serif",
+          "sans-serif",
+        ],
+        titling: [
+          "var(--font-titling-face)",
+          '"OptimusPrinceps"',
+          "Georgia",
+          "serif",
+        ],
       },
       borderRadius: {
         lg: "var(--radius)",

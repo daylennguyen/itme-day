@@ -4,6 +4,9 @@ import { Check, Copy } from "lucide-react";
 import { motion } from "motion/react";
 import { useMemo, useState, type CSSProperties } from "react";
 
+import { runescapeUF } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
 type FxColorId =
   | "red"
   | "orange"
@@ -172,7 +175,12 @@ export function TextFxPanel() {
       </motion.header>
 
       <div className="fx-stage flex min-h-[150px] items-center justify-center overflow-hidden px-5 py-11">
-        <div className="max-w-full font-fantasy text-[44px] leading-tight text-white">
+        <div
+          className={cn(
+            "max-w-full text-[44px] leading-tight text-white",
+            runescapeUF.className,
+          )}
+        >
           <FxPreview text={text} color={color} effect={effect} />
         </div>
       </div>
