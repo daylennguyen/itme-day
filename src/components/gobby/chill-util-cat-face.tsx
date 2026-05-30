@@ -37,7 +37,7 @@ import {
 } from "./chill-eye-view-box";
 import { usePrefersReducedMotion } from "./use-prefers-reduced-motion";
 
-type ChillFacialExpression =
+export type ChillFacialExpression =
   | "neutral"
   | "excited"
   | "happy"
@@ -253,6 +253,18 @@ export function ChillUtilCatFace({
       "0 0 1500 1000",
     );
     eyeSvgRef.current = eyeHost.current.querySelector("svg");
+    const svg = eyeSvgRef.current;
+    if (svg) {
+      const r = svg.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) {
+        setMouse({
+          elementX: r.width / 2,
+          elementY: r.height / 2,
+          elementWidth: r.width,
+          elementHeight: r.height,
+        });
+      }
+    }
   }, [eyeId, strokeColor]);
 
   useEffect(() => {

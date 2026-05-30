@@ -1,8 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useCallback, useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
+
+import type { ChillFacialExpression } from "./chill-util-cat-face";
 
 /** Defer anime.js + path morphing so `/gobby.svg` can paint first (FCP). */
 const ChillUtilCatFace = dynamic(
@@ -38,21 +41,58 @@ const faceWidthPct = (GOBBY_FACE.widthU / 2048) * 100;
 const faceLeftPct = (GOBBY_FACE.centerX / 2048) * 100;
 const faceTopPct = (GOBBY_FACE.centerY / 2048) * 100;
 
+/** Tap anywhere to step through; each expression sticks until the next tap. */
+const GOBBY_EXPRESSION_CYCLE: ChillFacialExpression[] = [
+  "neutral",
+  "happy",
+  "surprised",
+  "sad",
+  "angry",
+  "excited",
+  "derpy",
+];
+
 /** Login mascot: full-color `/gobby.svg` with Chill Component-style stacked SVG face + anime.js on the head. */
 export function GobbyMascot({
   className,
   frameClassName,
   smiley = false,
 }: GobbyMascotProps) {
+  const [expression, setExpression] =
+    useState<ChillFacialExpression>("neutral");
+
+  const cycleExpression = useCallback(() => {
+    setExpression((prev) => {
+      const i = GOBBY_EXPRESSION_CYCLE.indexOf(prev);
+      const next =
+        i >= 0
+          ? GOBBY_EXPRESSION_CYCLE[(i + 1) % GOBBY_EXPRESSION_CYCLE.length]!
+          : GOBBY_EXPRESSION_CYCLE[0]!;
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (smiley) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.button !== 0) return;
+      cycleExpression();
+    };
+
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => window.removeEventListener("pointerdown", onPointerDown);
+  }, [smiley, cycleExpression]);
+
   return (
     <div
       className={cn("flex w-full justify-center", className)}
       role="img"
-      aria-label="Gobby mascot"
+      aria-label={`Gobby mascot, ${expression} expression. Tap anywhere to change.`}
     >
       <div
         className={cn(
-          "relative mx-auto aspect-square w-full cursor-pointer",
+          "relative mx-auto aspect-square w-full",
           frameClassName ?? "max-w-[24rem] sm:max-w-[26rem]",
         )}
       >
@@ -68,11 +108,14 @@ export function GobbyMascot({
           className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-contain"
         />
         <div
-          className="pointer-events-auto absolute z-10 cursor-pointer touch-manipulation -translate-x-1/2 -translate-y-1/2"
+          className="pointer-events-none absolute z-10"
           style={{
             left: `${faceLeftPct}%`,
             top: `${faceTopPct}%`,
             width: `${faceWidthPct}%`,
+            // Inline only: v3 (globals) + v4 (rng-react-components.css) both define
+            // `-translate-x/y-1/2`, which stacks transform + translate and shifts the face ~50% left.
+            transform: "translate(-50%, -50%)",
           }}
         >
           <ChillUtilCatFace
@@ -80,8 +123,8 @@ export function GobbyMascot({
             strokeColor={GOBBY_FACE_STROKE}
             followPointer="viewport"
             eyeOffsetRadius={18}
-            facialExpression={smiley ? "pleasant" : undefined}
-            interactive={!smiley}
+            facialExpression={smiley ? "pleasant" : expression}
+            interactive={false}
           />
         </div>
       </div>
