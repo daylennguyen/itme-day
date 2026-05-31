@@ -30,4 +30,10 @@ describe("projects", () => {
   it("should include rng-react-components", () => {
     expect(projects.some((p) => p.id === "rng-react-components")).toBe(true);
   });
+
+  it("should include rerun-daylennet", () => {
+    const project = projects.find((p) => p.id === "rerun-daylennet");
+    expect(project?.href).toBe("https://rerun-daylennet.vercel.app/");
+    expect(project?.description).toContain("first website");
+  });
 });

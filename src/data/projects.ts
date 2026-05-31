@@ -30,4 +30,12 @@ export const projects: ProjectLink[] = [
     description: "This little hub — a minimal home for the projects I'm tinkering with.",
     tags: ["web"],
   },
+  {
+    id: "rerun-daylennet",
+    title: "daylen.net",
+    href: "https://rerun-daylennet.vercel.app/",
+    description:
+      "Once upon a time, there was my first website. The End and Enjoy.",
+    tags: ["archive", "portfolio", "web"],
+  },
 ];
