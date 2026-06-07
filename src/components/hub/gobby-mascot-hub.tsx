@@ -1,22 +1,29 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { GobbyMascot } from "@/components/gobby/gobby-mascot";
 import { cn } from "@/lib/utils";
 
 const MOODS = ["hi.", "rolling…", "nat 20!", "goblin mode", "✦"];
+const GOBBY_POP_MS = 500;
 
 export function GobbyMascotHub() {
   const [pop, setPop] = useState(false);
   const [mood, setMood] = useState<string | null>(null);
+  const popTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const moodTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onTap = useCallback(() => {
+    if (popTimerRef.current) window.clearTimeout(popTimerRef.current);
+    if (moodTimerRef.current) window.clearTimeout(moodTimerRef.current);
+
     setPop(false);
     requestAnimationFrame(() => {
       setPop(true);
       setMood(MOODS[Math.floor(Math.random() * MOODS.length)] ?? "hi.");
-      window.setTimeout(() => setMood(null), 1100);
+      moodTimerRef.current = window.setTimeout(() => setMood(null), 1100);
+      popTimerRef.current = window.setTimeout(() => setPop(false), GOBBY_POP_MS);
     });
   }, []);
 

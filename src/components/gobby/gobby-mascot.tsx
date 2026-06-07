@@ -82,6 +82,10 @@ export function GobbyMascot({
         frameClassName ?? "max-w-[12rem] sm:max-w-[13rem]",
       )}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[58%] z-0 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(132,155,73,0.45)_0%,rgba(132,155,73,0.16)_42%,transparent_72%)] blur-lg"
+      />
       {/* eslint-disable-next-line @next/next/no-img-element -- local static SVG */}
       <img
         src="/gobby.svg"
