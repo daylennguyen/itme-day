@@ -28,8 +28,11 @@ export function ProjectLinkCard({ project, index }: ProjectLinkCardProps) {
           ? { rel: "noopener noreferrer", target: "_blank" }
           : {})}
         className={cn(
-          "group relative block rounded-[14px] border border-border bg-card px-[22px] py-5 text-card-foreground no-underline shadow-[0_1px_3px_rgba(0,0,0,0.3)] transition-[transform,box-shadow,border-color] duration-250",
-          "hover:-translate-y-0.5 hover:border-[rgba(132,155,73,0.5)] hover:shadow-[0_1px_3px_rgba(0,0,0,0.3),0_0_20px_rgba(132,155,73,0.16)]",
+          "group relative block rounded-[14px] border border-[rgba(132,155,73,0.22)] bg-card px-[22px] py-5 text-card-foreground no-underline",
+          "shadow-[0_1px_3px_rgba(0,0,0,0.3),0_0_18px_rgba(132,155,73,0.14),inset_0_1px_0_rgba(255,255,255,0.05)]",
+          "transition-[transform,box-shadow,border-color] duration-250",
+          "hover:-translate-y-0.5 hover:border-[rgba(132,155,73,0.55)]",
+          "hover:shadow-[0_1px_3px_rgba(0,0,0,0.3),0_0_28px_rgba(132,155,73,0.34),0_0_56px_rgba(132,155,73,0.16),inset_0_1px_0_rgba(255,255,255,0.07)]",
         )}
       >
         <div className="flex items-center justify-between gap-3">
