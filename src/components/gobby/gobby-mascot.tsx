@@ -27,17 +27,32 @@ type GobbyMascotProps = {
 /**
  * Face overlay in % of the square mascot frame (`gobby.svg` viewBox 0 0 2048 2048).
  */
+const GOBBY_VIEWBOX = 2048;
+
 const GOBBY_FACE = {
   centerX: 941.5,
   centerY: 1014,
   widthU: 700,
 } as const;
 
+/** Cream portrait disc in `gobby.svg` (`<circle cx="1024" cy="1080" r="820" />`). */
+const GOBBY_PORTRAIT = {
+  centerX: 1024,
+  centerY: 1080,
+  radius: 820,
+} as const;
+
 const GOBBY_FACE_STROKE = "#334E43";
 
-const faceWidthPct = (GOBBY_FACE.widthU / 2048) * 100;
-const faceLeftPct = (GOBBY_FACE.centerX / 2048) * 100;
-const faceTopPct = (GOBBY_FACE.centerY / 2048) * 100;
+const toViewBoxPct = (units: number) => (units / GOBBY_VIEWBOX) * 100;
+
+const faceWidthPct = toViewBoxPct(GOBBY_FACE.widthU);
+const faceLeftPct = toViewBoxPct(GOBBY_FACE.centerX);
+const faceTopPct = toViewBoxPct(GOBBY_FACE.centerY);
+
+const portraitSizePct = toViewBoxPct(GOBBY_PORTRAIT.radius * 2);
+const portraitLeftPct = toViewBoxPct(GOBBY_PORTRAIT.centerX - GOBBY_PORTRAIT.radius);
+const portraitTopPct = toViewBoxPct(GOBBY_PORTRAIT.centerY - GOBBY_PORTRAIT.radius);
 
 const GOBBY_EXPRESSION_CYCLE: ChillFacialExpression[] = [
   "neutral",
@@ -84,7 +99,16 @@ export function GobbyMascot({
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[58%] z-0 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(132,155,73,0.45)_0%,rgba(132,155,73,0.16)_42%,transparent_72%)] blur-lg"
+        className="pointer-events-none absolute z-0 rounded-full"
+        style={{
+          left: `${portraitLeftPct}%`,
+          top: `${portraitTopPct}%`,
+          width: `${portraitSizePct}%`,
+          height: `${portraitSizePct}%`,
+          background:
+            "radial-gradient(circle, rgba(132,155,73,0.4) 0%, rgba(132,155,73,0.15) 55%, transparent 72%)",
+          boxShadow: "0 0 32px 10px rgba(132,155,73,0.2)",
+        }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element -- local static SVG */}
       <img
