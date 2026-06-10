@@ -11,8 +11,8 @@ const GOBBY_POP_MS = 500;
 export function GobbyMascotHub() {
   const [pop, setPop] = useState(false);
   const [mood, setMood] = useState<string | null>(null);
-  const popTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const moodTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const popTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const moodTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
 
   const onTap = useCallback(() => {
     if (popTimerRef.current) window.clearTimeout(popTimerRef.current);
