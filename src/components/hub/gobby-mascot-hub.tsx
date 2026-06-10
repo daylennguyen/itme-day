@@ -15,15 +15,15 @@ export function GobbyMascotHub() {
   const moodTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onTap = useCallback(() => {
-    if (popTimerRef.current) window.clearTimeout(popTimerRef.current);
-    if (moodTimerRef.current) window.clearTimeout(moodTimerRef.current);
+    if (popTimerRef.current) clearTimeout(popTimerRef.current);
+    if (moodTimerRef.current) clearTimeout(moodTimerRef.current);
 
     setPop(false);
     requestAnimationFrame(() => {
       setPop(true);
       setMood(MOODS[Math.floor(Math.random() * MOODS.length)] ?? "hi.");
-      moodTimerRef.current = window.setTimeout(() => setMood(null), 1100);
-      popTimerRef.current = window.setTimeout(() => setPop(false), GOBBY_POP_MS);
+      moodTimerRef.current = setTimeout(() => setMood(null), 1100);
+      popTimerRef.current = setTimeout(() => setPop(false), GOBBY_POP_MS);
     });
   }, []);
 
